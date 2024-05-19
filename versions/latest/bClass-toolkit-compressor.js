@@ -1,23 +1,21 @@
 /*
- * * Bclass toolkit compressor v1.0.0 (--)
+ * * Bclass toolkit compressor v1.1.0
  * * Copyright 2023 ("https://github.com/EW-EndWall/bClass-compressor/blob/main/LICENSE")
  * * Licensed ("Bik Public License 2.0")
  * * License Update ("03/28/2024")
  */
-export default function compressorAlgorithm(
-  getcontent = "",
+const compressorAlgorithm = (
+  contentData = "",
   selectedDataType = "",
   dataContributorsClear = ""
-) {
-  let data_type = selectedDataType;
-  let data_contributors_clear = dataContributorsClear;
-  let content = getcontent;
+) => {
+  let content = contentData;
   let originalSize = 0;
   let compressedSize = 0;
   let compressionRate = 0;
   let contentMin = "";
 
-  if (data_type == "CSS") {
+  if (selectedDataType == "CSS") {
     let cssContent = "";
     let cssContentMin = "";
 
@@ -27,33 +25,37 @@ export default function compressorAlgorithm(
     cssContent += content.trim() + "\n";
 
     // * css min
-    if (data_contributors_clear) {
-      ///-------------------------------------------
+    if (dataContributorsClear) {
       // * Remove CSS comments
       content = content.replace(/\/\*.*?\*\//gs, "");
     } else {
       // * Remove CSS comments except the ones starting with "/* *"
-      content = content.replace(/\/\*(?!\s*\*)(.|\n)*?\*\//gs, ""); //! bunu php de de yap
+      content = content.replace(/\/\*(?!\s*\*)(.|\n)*?\*\//gs, "");
     }
 
     // * Replace multiple whitespaces with a single space
     content = content.replace(/\s+/g, " ");
 
     // * Remove unnecessary whitespaces
-    content = content.replace(/: |, |; | \{| \{|\} /g, function (match) {
+    content = content.replace(/: |, |; | \{| \{|\} /g, (match) => {
       return match.trim();
     });
 
-    content = content.replace(/([^\/])\/\*/g, "$1\n/*"); //! -------------------------------------- yorumsatır atlama
-    content = content.replace(/\*\//g, "*/\n"); //! -------------------------------------- satır atlama
-    content = content.replace(/([^\/])\*\s*\*\s*/g, "$1\n * * "); //! ---------------------------- lisans satır atlama
+    // * comment line skip
+    content = content.replace(/([^\/])\/\*/g, "$1\n/*");
+
+    // * line skip
+    content = content.replace(/\*\//g, "*/\n");
+
+    // * license line skip
+    content = content.replace(/([^\/])\*\s*\*\s*/g, "$1\n * * ");
 
     cssContentMin += content.trim() + "\n";
 
     compressedSize = cssContentMin.length;
 
     contentMin = cssContentMin;
-  } else if (data_type == "JS") {
+  } else if (selectedDataType == "JS") {
     let jsContent = "";
     let jsContentMin = "";
 
@@ -63,8 +65,7 @@ export default function compressorAlgorithm(
     jsContent += content.trim() + "\n";
 
     // * js min
-    if (data_contributors_clear) {
-      ///-------------------------------------------
+    if (dataContributorsClear) {
       // * Remove JS comments
       content = content.replace(/(\/\*(.|[\r\n])*?\*\/|\/\/.*)/g, "");
     } else {
@@ -72,7 +73,7 @@ export default function compressorAlgorithm(
       content = content.replace(
         /\/\*(?!\s*\*)(.|\n)*?\*\/|\/\/(?!.*?\/\* *).*$/gm,
         ""
-      ); //---------------------------------------------------- php ekle
+      );
     }
 
     // * Replace horizontal whitespaces with a single space
@@ -82,7 +83,6 @@ export default function compressorAlgorithm(
     content = content.replace(/\n/g, "");
 
     // * Remove extra spaces around specific characters
-    // content = content.replace(/(\s*([{}:;,()=<>+\-*\/])\s*)/g, "$2");
     content = content.replace(
       /\/\*\s*\*\s*([\s\S]*?)\s*\*\s*\*\//g,
       (match, innerContent) => {
@@ -97,9 +97,14 @@ export default function compressorAlgorithm(
     // * Remove spaces around quotes
     content = content.replace(/\s*(['"])\s*/g, "$1");
 
-    content = content.replace(/([^\/])\/\*/g, "$1\n/*"); //! -------------------------------------- yorum satır atlama
-    content = content.replace(/\*\//g, "*/\n"); //! -------------------------------------- satır atlama
-    content = content.replace(/([^\/])\*\s*\*\s*/g, "$1\n * * "); //! ---------------------------- lisans satır atlama
+    // * comment line skip
+    content = content.replace(/([^\/])\/\*/g, "$1\n/*");
+
+    // * line skip
+    content = content.replace(/\*\//g, "*/\n");
+
+    // * license line skip
+    content = content.replace(/([^\/])\*\s*\*\s*/g, "$1\n * * ");
 
     jsContentMin += content.trim() + "\n";
 
@@ -108,8 +113,8 @@ export default function compressorAlgorithm(
     contentMin = jsContentMin;
   }
 
-  originalSize /= 1024; // kb
-  compressedSize /= 1024; // kb
+  originalSize /= 1024; // * kb
+  compressedSize /= 1024; // * kb
   compressionRate = ((originalSize - compressedSize) / originalSize) * 100;
   let spaceSaved = originalSize - compressedSize;
   if (compressionRate < 0) (compressionRate = 0.0), (spaceSaved = 0.0);
@@ -121,4 +126,6 @@ export default function compressorAlgorithm(
     save: spaceSaved.toFixed(2),
     content: contentMin,
   };
-}
+};
+
+export default compressorAlgorithm;

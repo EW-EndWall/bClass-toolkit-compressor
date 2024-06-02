@@ -4,11 +4,11 @@
  * * Licensed ("Bik Public License 2.0")
  * * License Update ("03/28/2024")
  */
-const compressorAlgorithm = (
+const compressorAlgorithm = ({
   contentData = "",
   selectedDataType = "",
-  dataContributorsClear = ""
-) => {
+  dataContributorsClear = "",
+}) => {
   let content = contentData;
   let originalSize = 0;
   let compressedSize = 0;

@@ -1,5 +1,5 @@
-/*
- * * Bclass toolkit compressor v1.1.0
+/***
+ * * Bclass toolkit compressor v1.0.0
  * * Copyright 2023 ("https://github.com/EW-EndWall/bClass-compressor/blob/main/LICENSE")
  * * Licensed ("Bik Public License 2.0")
  * * License Update ("03/28/2024")
@@ -26,11 +26,14 @@ const compressorAlgorithm = ({
 
     // * css min
     if (dataContributorsClear) {
+      ///-------------------------------------------
       // * Remove CSS comments
       content = content.replace(/\/\*.*?\*\//gs, "");
     } else {
       // * Remove CSS comments except the ones starting with "/* *"
-      content = content.replace(/\/\*(?!\s*\*)(.|\n)*?\*\//gs, "");
+      // content = content.replace(/\/\*(?!\s*\*)(.|\n)*?\*\//gs, "");
+      // * Remove CSS comments except the ones starting with "/***"
+      content = content.replace(/\/\*(?!\s*\*\*)(.|\n)*?\*\//gs, "");
     }
 
     // * Replace multiple whitespaces with a single space
@@ -41,14 +44,10 @@ const compressorAlgorithm = ({
       return match.trim();
     });
 
-    // * comment line skip
     content = content.replace(/([^\/])\/\*/g, "$1\n/*");
-
-    // * line skip
     content = content.replace(/\*\//g, "*/\n");
-
-    // * license line skip
-    content = content.replace(/([^\/])\*\s*\*\s*/g, "$1\n * * ");
+    // content = content.replace(/([^\/])\*\s*\*\s*/g, "$1\n * * "); // **
+    content = content.replace(/([^\/])\*\s\*\s(?!\*)/g, "$1\n * * "); // ***
 
     cssContentMin += content.trim() + "\n";
 
@@ -70,8 +69,12 @@ const compressorAlgorithm = ({
       content = content.replace(/(\/\*(.|[\r\n])*?\*\/|\/\/.*)/g, "");
     } else {
       // * Remove JavaScript comments except the ones starting with "/* *"
+      // content = content.replace(
+      //   /\/\*(?!\s*\*)(.|\n)*?\*\/|\/\/(?!.*?\/\* *).*$/gm,
+      //   ""
+      // );
       content = content.replace(
-        /\/\*(?!\s*\*)(.|\n)*?\*\/|\/\/(?!.*?\/\* *).*$/gm,
+        /\/\*(?!\s*\*\*)(.|\n)*?\*\/|\/\/(?!.*?\/\* *).*$/gm,
         ""
       );
     }
@@ -83,28 +86,32 @@ const compressorAlgorithm = ({
     content = content.replace(/\n/g, "");
 
     // * Remove extra spaces around specific characters
+    // content = content.replace(/(\s*([{}:;,()=<>+\-*\/])\s*)/g, "$2");
+    // content = content.replace(
+    //   /\/\*\s*\*\s*([\s\S]*?)\s*\*\s*\*\//g, // *
+    //   (match, innerContent) => {
+    //     return (
+    //       "/* * " +
+    //       innerContent.replace(/(\s*([{}:;,()=<>+\-*\/])\s*)/g, "$2") +
+    //       " */"
+    //     );
+    //   }
+    // );
     content = content.replace(
-      /\/\*\s*\*\s*([\s\S]*?)\s*\*\s*\*\//g,
-      (match, innerContent) => {
-        return (
-          "/* * " +
-          innerContent.replace(/(\s*([{}:;,()=<>+\-*\/])\s*)/g, "$2") +
-          " */"
-        );
+      // ***
+      /\*\*\*.*?\*\/|\s*([{}:;,()=<>+\-*\/])\s*/gs,
+      (match, p1) => {
+        return p1 ? p1 : match;
       }
     );
 
     // * Remove spaces around quotes
     content = content.replace(/\s*(['"])\s*/g, "$1");
 
-    // * comment line skip
     content = content.replace(/([^\/])\/\*/g, "$1\n/*");
-
-    // * line skip
     content = content.replace(/\*\//g, "*/\n");
-
-    // * license line skip
-    content = content.replace(/([^\/])\*\s*\*\s*/g, "$1\n * * ");
+    // content = content.replace(/([^\/])\*\s*\*\s*/g, "$1\n * * "); // **
+    content = content.replace(/([^\/])\*\s\*\s(?!\*)/g, "$1\n * * "); // ***
 
     jsContentMin += content.trim() + "\n";
 

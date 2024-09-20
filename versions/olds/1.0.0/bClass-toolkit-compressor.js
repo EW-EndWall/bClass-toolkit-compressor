@@ -1,4 +1,4 @@
-/*
+/***
  * * Bclass toolkit compressor v1.0.0
  * * Copyright 2023 ("https://github.com/EW-EndWall/bClass-compressor/blob/main/LICENSE")
  * * Licensed ("Bik Public License 2.0")

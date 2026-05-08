@@ -1,8 +1,8 @@
-# bClass Toolkit Compressor
+# bClass toolkit compressor
 
 ## Overview
 
-bClass Toolkit Compressor removes unnecessary spaces, comments, and formatting from CSS and JavaScript code to compress them. It provides compression functionality for both CSS and JavaScript files with different comment processing options.
+`bClass toolkit compressor` removes unnecessary spaces, comments, and formatting from CSS and JavaScript code to compress them. It provides compression functionality for both CSS and JavaScript files with different comment processing options.
 
 ## Features
 
@@ -404,6 +404,6 @@ export default {
 </template>
 ```
 
----
+## License
 
-This translation maintains the original content and structure of the documentation without making any changes.
+> Distributed under the Bik Public License 4.0 License. See [LICENSE](./../../../LICENSE) for more information.

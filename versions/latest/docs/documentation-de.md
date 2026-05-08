@@ -1,8 +1,8 @@
-# bClass Toolkit Compressor
+# bClass toolkit compressor
 
 ## Übersicht
 
-bClass Toolkit Compressor entfernt unnötige Leerzeichen, Kommentare und Formatierungen aus CSS- und JavaScript-Code. Er bietet Funktionen zur Kompression sowohl für CSS als auch für JavaScript-Dateien mit verschiedenen Einstellungen für die Verarbeitung von Kommentaren.
+`bClass toolkit compressor` entfernt unnötige Leerzeichen, Kommentare und Formatierungen aus CSS- und JavaScript-Code. Er bietet Funktionen zur Kompression sowohl für CSS als auch für JavaScript-Dateien mit verschiedenen Einstellungen für die Verarbeitung von Kommentaren.
 
 ## Funktionen
 
@@ -404,3 +404,7 @@ export default {
   </div>
 </template>
 ```
+
+## Lizenz
+
+> Veröffentlicht unter der Bik Public License 4.0. Weitere Informationen finden Sie in der [LICENSE](./../../../LICENSE).

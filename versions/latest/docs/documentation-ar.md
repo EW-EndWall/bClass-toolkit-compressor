@@ -1,4 +1,4 @@
-# أدوات بلاكاس توفير المكانة
+# bClass toolkit compressor
 
 ## نظرة عامة
 
@@ -140,7 +140,7 @@ document.getElementById("data_status_out_save").textContent = result.save;
           <div class="w-100">
             <label class="content-2 input-checkbox-m-1 m-1">
               <input type="checkbox" name="data_contributors_clear" checked />
-              <span class="text-capitalize ml-0.5 m-auto">حذف المساهمين</span>
+              <span class="text-capitalize ml-0.5 m-auto"> حذف المساهمين </span>
             </label>
           </div>
 
@@ -400,3 +400,7 @@ export default {
   </div>
 </template>
 ```
+
+## الترخيص
+
+> يتم التوزيع بموجب ترخيص Bik Public License 4.0. راجع ملف [LICENSE](./../../../LICENSE) لمزيد من المعلومات.

@@ -1,8 +1,8 @@
-# bClass Toolkit Compressor
+# bClass toolkit compressor
 
 ## Genel Bakış
 
-bClass Toolkit Compressor, gereksiz boşlukları, yorumları ve biçimlendirmeleri kaldırarak CSS ve JavaScript kodlarını sıkıştırır. Farklı yorum işleme seçenekleriyle hem CSS hem de JavaScript dosyası sıkıştırma işlevselliği sağlar.
+`bClass toolkit compressor`, gereksiz boşlukları, yorumları ve biçimlendirmeleri kaldırarak CSS ve JavaScript kodlarını sıkıştırır. Farklı yorum işleme seçenekleriyle hem CSS hem de JavaScript dosyası sıkıştırma işlevselliği sağlar.
 
 ## Özellikler
 
@@ -140,9 +140,9 @@ Fonksiyon aşağıdaki bilgileri içeren bir nesne döndürür:
           <div class="w-100">
             <label class="content-2 input-checkbox-m-1 m-1">
               <input type="checkbox" name="data_contributors_clear" checked />
-              <span class="text-capitalize ml-0.5 m-auto"
-                >Contributors clear</span
-              >
+              <span class="text-capitalize ml-0.5 m-auto">
+                Contributors clear
+              </span>
             </label>
           </div>
 
@@ -403,3 +403,7 @@ export default {
   </div>
 </template>
 ```
+
+## Lisans
+
+> Bik Public License 4.0 Lisansı kapsamında dağıtılmaktadır. Daha fazla bilgi için [LICENSE](./../../../LICENSE) dosyasın
